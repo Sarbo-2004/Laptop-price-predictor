@@ -122,16 +122,59 @@ def recommend_laptops():
                 st.markdown(f"Recommendation data missing for index {idx}")
     except Exception as e:
         st.error(f"Recommendation failed: {e}")
-
+        
+def add_footer():
+    footer_html = """
+    <style>
+    .footer {
+        margin-top: 50px;
+        padding: 10px 0;
+        text-align: center;
+        color: #666666;
+        font-size: 14px;
+        border-top: 1px solid #e6e6e6;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    </style>
+    <div class="footer">
+        Developed by Sarbojeet & Arjya
+    </div>
+    """
+    st.markdown(footer_html, unsafe_allow_html=True)
+    
+def fix_page_height():
+    st.markdown(
+        """
+        <style>
+        .appview-container .main {
+            height: 100vh;
+            overflow-y: auto;
+        }
+        .footer {
+            margin-top: 10px;
+            padding: 10px 0;
+            text-align: center;
+            color: #666666;
+            font-size: 14px;
+            border-top: 1px solid #e6e6e6;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            width: 100%;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+        )
 # ------------------- Main -------------------
 def main():
+    fix_page_height()
     st.sidebar.title("🎯 Choose Feature")
     option = st.sidebar.radio("", ["Predict Price", "Recommend Laptops"])
-
+    
     if option == "Predict Price":
         predict_price()
     elif option == "Recommend Laptops":
         recommend_laptops()
-
+    add_footer()
 if __name__ == '__main__':
     main()
+    
